@@ -1,7 +1,7 @@
 global proc mGui()
 {
 if(`window -exists ItemList`) {deleteUI -window ItemList;}
-string $myWin = `window -rtf 1 -title "Quick controls" -iconName "Controls" -mxb 0  ItemList ` ;
+string $myWin = `window -rtf 1 -title "Quick controls" -iconName "Controls" -mxb 0  ItemList`;
 	string $form = `formLayout`;
     
     string $sDir = `internalVar -userScriptDir`;
@@ -11,143 +11,97 @@ string $myWin = `window -rtf 1 -title "Quick controls" -iconName "Controls" -mxb
 
 	string $logo = `columnLayout`;
 
-        // create a collapsible frame layout
         frameLayout -collapsable true -label "Poly Objects" -bgc 0.015 0.325 0.196;
-
-            // define the layout of controls added 
-            // to the window.
-            rowLayout -numberOfColumns 4 -columnWidth4 35 40 30 1;
-                
-                // create three symbol buttons with related mel command
-                text -label "Plane" -align "right" -bgc 0.1 0.74 0.43;
+			//Labels
+			rowLayout -numberOfColumns 4 -columnWidth4 35 40 30 1;
+				text -label "Plane" -align "right" -bgc 0.1 0.74 0.43;
                 text -label "Sphere" -align "right" -bgc 0.1 0.74 0.43;
                 text -label "Cube" -align "right" -bgc 0.1 0.74 0.43;
                 text -label "Cylinder" -align "right" -bgc 0.1 0.74 0.43;
-	            
 			setParent ..;
+			//Icons
             rowLayout -numberOfColumns 4;
-
-                
-                // create three symbol buttons with related mel command
-                symbolButton -image "polyMesh.png" -command "CreatePolygonPlane";
+				symbolButton -image "polyMesh.png" -command "CreatePolygonPlane";
                 symbolButton -image "polySphere.png" -command "CreatePolygonSphere";
                 symbolButton -image "polyCube.png" -command "CreatePolygonCube";
                 symbolButton -image "polyCylinder.png" -command "CreatePolygonCylinder";
-	            
 			setParent ..;
 		setParent ..;
-
-    // create a collapsible frame layout
+		
         frameLayout -collapsable true -label "Manipulators" -bgc 0.015 0.325 0.196;
-
-            // define the layout of controls added 
-            // to the window.
-            rowLayout -numberOfColumns 4 -columnWidth4 35 40 32 1;
-                
-                // create three symbol buttons with related mel command
+			//Labels
+			rowLayout -numberOfColumns 4 -columnWidth4 35 40 32 1;
                 text -label "Harden" -align "right" -bgc 0.1 0.74 0.43;
                 text -label "Soften" -align "right" -bgc 0.1 0.74 0.43;
                 text -label "Slide" -align "right" -bgc 0.1 0.74 0.43;
 	            text -label "Bevel" -align "right" -bgc 0.1 0.74 0.43;
-	            
 			setParent ..;
+			//Icons
             rowLayout -numberOfColumns 4;
-
-                
-                // create three symbol buttons with related mel command
-                symbolButton -image "polyHardEdge.png" -command "SoftPolyEdgeElements 0";
+				symbolButton -image "polyHardEdge.png" -command "SoftPolyEdgeElements 0";
                 symbolButton -image "polySoftEdge.png" -command "SoftPolyEdgeElements 1";
                 symbolButton -image "slideEdgeTool.png" -command "SlideEdgeTool";
 	            symbolButton -image "polyBevel.png" -command "BevelPolygonOptions";
-	            
 			setParent ..;
-			//Row2 Mainpulators
+			//Labels
 			rowLayout -numberOfColumns 4 -columnWidth4 35 40 45 1;
-                
-                // create three symbol buttons with related mel command
                 text -label "Merge" -align "right" -bgc 0.1 0.74 0.43;
                 text -label "Extrude" -align "right" -bgc 0.1 0.74 0.43;
                 text -label "Collapse" -align "right" -bgc 0.1 0.74 0.43;
 	            text -label "Append" -align "right" -bgc 0.1 0.74 0.43;
-	            
-			setParent ..;
-            rowLayout -numberOfColumns 4 -columnWidth4 40 40 45 1;
-
-                
-                // create three symbol buttons with related mel command
-                symbolButton -image "polyMerge.png" -command "PolyMergeOptions";
+	        setParent ..;
+            //Icons
+			rowLayout -numberOfColumns 4 -columnWidth4 40 40 45 1;
+				symbolButton -image "polyMerge.png" -command "PolyMergeOptions";
                 symbolButton -image "polyExtrudeFacet.png" -command "performPolyExtrude 1;";
                 symbolButton -image "polyCollapseEdge.png" -command "performPolyCollapse 0";
 	            symbolButton -image "polyAppendFacet.png" -command "AppendToPolygonToolOptions";
-	            
-			setParent ..;
+	        setParent ..;
 		setParent ..;	
 		
         frameLayout -collapsable true -label "Edit/Modify" -bgc 0.015 0.325 0.196;
-
-            // define the layout of controls added 
-            // to the window.
-            rowLayout -numberOfColumns 3 -columnWidth3 47	35	1;
-                
-                // create three symbol buttons with related mel command
+			//Labels
+			rowLayout -numberOfColumns 3 -columnWidth3 47	35	1;
                 text -label "Hist" -align "right" -bgc 0.1 0.74 0.43;
                 text -label "FT" -align "right" -bgc 0.1 0.74 0.43;
                 text -label "CP" -align "right" -bgc 0.1 0.74 0.43;
-	            
-			setParent ..;
-            rowLayout -numberOfColumns 3;
-
-                
-                // create three symbol buttons with related mel command
-                symbolButton -image "menuIconEdit.png" -command "DeleteHistory";
+	        setParent ..;
+			//Icons
+			rowLayout -numberOfColumns 3;
+				symbolButton -image "menuIconEdit.png" -command "DeleteHistory";
                 symbolButton -image "menuIconModify.png" -command "FreezeTransformations";
                 symbolButton -image "menuIconModify.png" -command "CenterPivot";
-	            
-			setParent ..;
+	        setParent ..;
 		setParent ..;	
-
-    // create a collapsible frame layout
-    frameLayout -collapsable true -label "Custom Controls" -bgc 0.015 0.325 0.196;
-            rowLayout -numberOfColumns 3 -columnWidth3 70 60 1;
-                
-                // create three symbol buttons with related mel command
+		
+		frameLayout -collapsable true -label "Custom Controls" -bgc 0.015 0.325 0.196;
+            //Icons
+			rowLayout -numberOfColumns 3 -columnWidth3 70 60 1;
                 text -label "MirrorZ" -align "left" -bgc 0.1 0.74 0.43;
                 text -label "MirrorX" -align "left" -bgc 0.1 0.74 0.43;
 	            text -label "MirrorY" -align "left" -bgc 0.1 0.74 0.43;
-	            
-			setParent ..;
-        // define the layout of controls added 
-        // to the window.
-        rowLayout -numberOfColumns 3 -columnWidth3 60 60 1;
-
-            // create a couple of buttons
-            	symbolButton -image ( $sDir + "MirrorZ.png") -command "source MirrorZ; MirrorZ;";
+	        setParent ..;
+			//Icons
+			rowLayout -numberOfColumns 3 -columnWidth3 60 60 1;
+				symbolButton -image ( $sDir + "MirrorZ.png") -command "source MirrorZ; MirrorZ;";
             	symbolButton -image ( $sDir + "MirrorX.png") -command "source MirrorX; MirrorX;";
-		symbolButton -image ( $sDir + "Mirrory.png") -command "source MirrorY; MirrorY;";
-
-		setParent ..;
-		
+				symbolButton -image ( $sDir + "Mirrory.png") -command "source MirrorY; MirrorY;";
+			setParent ..;
+			//Labels
 		    rowLayout -numberOfColumns 1;
-                
-                // create three symbol buttons with related mel command
-                text -label "Tri/Poly/Ngon" -align "left" -bgc 0.1 0.74 0.43;
-                
-        setParent ..;
-        // define the layout of controls added 
-        // to the window.
-        rowLayout -numberOfColumns 1;
-
-            // create a couple of buttons
-            	symbolButton -image ( $sDir + "tripolngon.png") -command "source highlightfaces; highlightfaces;";
- 
+				text -label "Tri/Poly/Ngon" -align "left" -bgc 0.1 0.74 0.43;
+			setParent ..;
+			//Icons
+			rowLayout -numberOfColumns 1;
+				symbolButton -image ( $sDir + "tripolngon.png") -command "source highlightfaces; highlightfaces;";
+			setParent ..;
 		setParent ..;
-	setParent ..;
+	
 	formLayout -e
 		-af $i top -3 -af $i left -5 -af $i right 0 -af $i bottom 0
 		-af $iLogo top 5 -af $iLogo left 35 -af $iLogo right 0 -af $iLogo bottom 0
 		-af $logo top 80 -af $logo left 0 -af $logo right 0 -af $logo bottom 0
 	$form;
-// show the window we last created
+	
 showWindow;
-
 }
