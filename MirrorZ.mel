@@ -1,0 +1,26 @@
+global proc  MirrorZ()
+{
+	string $selection[] = `ls -sl`;
+
+	for ($sel in $selection) {
+
+		Duplicate;
+
+		string $FirstObj[] = `ls -selection`;
+
+		Group;
+
+		string $SecondObj[] = `ls -selection`;
+
+		scale 1 1 -1;
+
+		select -r $FirstObj;
+
+		parent -w;
+
+		select -r $SecondObj;
+
+		doDelete;
+
+	}
+}

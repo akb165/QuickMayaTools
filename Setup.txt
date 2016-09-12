@@ -1,0 +1,11 @@
+To install place all items in the Documents/maya/2016/scripts folder.
+Open Maya 2016 
+	In the Mel script editor at the bottom paste: source Gui; mGui;
+	Highlight and middle mouse it to your toolbar.
+	If you want the custom toolbar icon:
+		Click on the gear to the left select Shelf Editor
+		Under shelf content select the code you pasted.
+			now goto Icon Name: and click on the folder and go to where you pasted all the contents
+			and select Logo.png
+
+Shut down Maya and restart and you will be up and running.

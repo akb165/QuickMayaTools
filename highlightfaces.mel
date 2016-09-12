@@ -1,0 +1,66 @@
+global proc highlightfaces()
+{
+
+	string $polyObj[] = `ls -sl`;
+	int $faceCount[] = `polyEvaluate -f $polyObj[0]`; 
+
+
+	//check to see if the shaders already exist and create them if they don't
+
+	if (`objExists triShader` == 0)
+		{
+		$triShader = `shadingNode -asShader lambert -n triShader`;
+		sets -renderable true -noSurfaceShader true -empty -name triShaderSG;
+		connectAttr -f triShader.outColor triShaderSG.surfaceShader;
+		setAttr "triShader.color" -type double3 0 .027 .837 ;
+		}
+
+	if (`objExists QuadShader` == 0)
+		{
+		$QuadShader = `shadingNode -asShader lambert -n QuadShader`;
+		sets -renderable true -noSurfaceShader true -empty -name QuadShaderSG;
+		connectAttr -f QuadShader.outColor QuadShaderSG.surfaceShader;
+		setAttr "QuadShader.color" -type double3 0 .837 .273 ;
+		}
+
+	if (`objExists NsidedShader` == 0)
+		{
+		$NsidedShader = `shadingNode -asShader lambert -n NsidedShader`;
+		sets -renderable true -noSurfaceShader true -empty -name NsidedShaderSG;
+		connectAttr -f NsidedShader.outColor NsidedShaderSG.surfaceShader;
+		setAttr "NsidedShader.color" -type double3 .84 0 0 ;
+		}
+
+	int $i; 
+
+	for ($i =0; $i < $faceCount[0]; $i++)
+		{
+		//put the face into a string
+		string $face = $polyObj[0] + ".f[" + $i + "]";
+
+		//get the names of the vertices in string format.
+		string $vertexString[] = `polyInfo -fv $face`;
+
+		//declare an array that will hold the individual vertices
+		string $converted[];
+
+		//break the single string into parts and place into an array
+		tokenize $vertexString[0] " " $converted;
+
+		//count the size of the array minus the extra garbage that is produced by polyInfo
+		int $vertCount = (`size $converted`) - 3;
+		
+			//set the color of the face based on the number of vertices.
+		switch ($vertCount){
+			case 3:
+				sets -e -forceElement triShaderSG $face;
+				break;
+			case 4:
+				sets -e -forceElement QuadShaderSG $face;
+				break;
+			default:
+				sets -e -forceElement NsidedShaderSG $face;
+				break;
+		}
+	}
+}
